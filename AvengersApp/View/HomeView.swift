@@ -10,9 +10,9 @@ import SwiftUI
 import SwiftUI
 
 struct HomeView: View {
+    @EnvironmentObject var myAppManager: MyAppManager
     @StateObject private var viewModel = MovieViewModel()
-    @State private var selectedLanguage = "es-ES"
-    @State private var searchText = ""
+    @Binding var path: [Movie]
     
     private let columns = [
         GridItem(.flexible(), spacing: 20),
@@ -20,54 +20,68 @@ struct HomeView: View {
     ]
     
     var body: some View {
-        VStack {
-            SearchBarView(searchText: $searchText)
-                .onChange(of: searchText) { _, newValue in
-                    Task {
-                        if !newValue.isEmpty {
-                            await viewModel.fetchMovies(language: selectedLanguage, query: newValue)
-                        }
-                        else {
-                            await viewModel.fetchMovies(language: selectedLanguage)
+        ZStack {
+            Color(red: 15/255, green: 15/255, blue: 25/255).ignoresSafeArea()
+            
+            VStack {
+                SearchBarView(searchText: $viewModel.searchText)
+                    .onChange(of: viewModel.searchText) { _, newValue in
+                        Task {
+                            if !newValue.isEmpty, newValue.count > 3 {
+                                await viewModel.fetchMovies(query: newValue)
+                            }
+                            else {
+                                await viewModel.fetchMovies()
+                            }
                         }
                     }
-                }
-            
-            ScrollView {
-                LazyVGrid(columns: columns, spacing: 20) {
-                    ForEach(viewModel.movies) { movie in
-                        CardItemsView(movie: movie, selectedLanguage: selectedLanguage)
+                
+                ScrollView {
+                    LazyVGrid(columns: columns, spacing: 20) {
+                        ForEach(viewModel.movies) { movie in
+                            CardItemsView(movie: movie,
+                                          selectedLanguage: myAppManager.selectedLanguage,
+                                          action: {self.path.append(movie)})
                             .onAppear {
                                 if movie.id == viewModel.movies.last?.id && viewModel.currentPage < viewModel.totalPages {
                                     Task {
-                                        await viewModel.fetchMovies(language: selectedLanguage, query: searchText, page: viewModel.currentPage + 1)
+                                        await viewModel.fetchMovies(query: viewModel.searchText, page: viewModel.currentPage + 1)
                                     }
                                 }
                             }
+                        }
                     }
+                    .padding()
                 }
-                .padding()
             }
         }
+        .navigationDestination(for: Movie.self) { movie in
+                    DetailView(movie: movie)
+        }
         .task {
-            await viewModel.fetchMovies(language: selectedLanguage)
+            await viewModel.fetchMovies()
         }
         .refreshable {
-            await viewModel.fetchMovies(language: selectedLanguage)
+            await viewModel.fetchMovies()
         }
-        .navigationTitle("home_title")
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button(action: {
-                    selectedLanguage = selectedLanguage == "es-ES" ? "en-US" : "es-ES"
+                    myAppManager.selectedLanguage =  myAppManager.selectedLanguage == "es-ES" ? "en-US" : "es-ES"
                     Task {
-                        await viewModel.fetchMovies(language: selectedLanguage)
+                        await viewModel.fetchMovies()
                     }
                 }) {
-                    Text(selectedLanguage == "es-ES" ? "ES" : "EN")
+                    Text(myAppManager.selectedLanguage == "es-ES" ? "ES" : "EN")
                         .fontWeight(.bold)
                 }
+            }
+            
+            ToolbarItem(placement: .principal) {
+                Text("home_title")
+                    .font(.headline)
+                    .foregroundColor(.white)
             }
         }
     }
@@ -75,5 +89,5 @@ struct HomeView: View {
 
 
 #Preview {
-    HomeView()
+    HomeView(path: .constant([]))
 }

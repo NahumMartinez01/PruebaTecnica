@@ -10,9 +10,14 @@ import CoreData
 
 struct ContentView: View {
     @EnvironmentObject var myAppManager: MyAppManager
+    @State private var path = [Movie]()
+    
     var body: some View {
         ZStack {
-            HomeView()
+            NavigationStack(path: $path) {
+                HomeView(path: $path)
+            }
+          
             if myAppManager.isLoadingView {
                 ZStack {
                     Color.clear

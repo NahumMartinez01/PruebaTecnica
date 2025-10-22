@@ -13,6 +13,7 @@ class MovieViewModel: ObservableObject {
     @Published var errorMessage: String? = nil
     @Published var currentPage = 1
     @Published var totalPages = 1
+    @Published var searchText: String = ""
     
     private var appManager: MyAppManager
     
@@ -21,20 +22,21 @@ class MovieViewModel: ObservableObject {
     }
     
     @MainActor
-    func fetchMovies(language: String, query: String = "Avengers", page: Int = 1) async {
-        let queryForm = query.isEmpty ? "Avengers" : query
+    func fetchMovies(query: String = "Avengers", page: Int = 1) async {
         errorMessage = nil
         self.appManager.isLoadingView = true
         
-        guard var components = URLComponents(string: "https://api.themoviedb.org/3/search/movie") else {
+        let finalQuery = query.isEmpty ? "Avengers" : query
+        
+        guard var components = URLComponents(string: "https://api.themoviedb.org/3/collection/86311?language=es-ES") else {
             errorMessage = "URL inválida"
             self.appManager.isLoadingView = false
             return
         }
         
         components.queryItems = [
-            URLQueryItem(name: "query", value: queryForm),
-            URLQueryItem(name: "language", value: language),
+            URLQueryItem(name: "query", value: finalQuery),
+            URLQueryItem(name: "language", value: self.appManager.selectedLanguage),
             URLQueryItem(name: "page", value: "\(page)")
         ]
         
@@ -62,9 +64,9 @@ class MovieViewModel: ObservableObject {
             }
 
             let decoder = JSONDecoder()
-            let decoded = try decoder.decode(MovieSearchResponse.self, from: data)
+            let datum = try decoder.decode(MovieCollectionResponse.self, from: data)
             
-            for movie in decoded.results {
+            for movie in datum.parts {
                 print("""
                 🎬 Título: \(movie.title)
                 📅 Estreno: \(movie.releaseDate ?? "Sin fecha")
@@ -74,7 +76,9 @@ class MovieViewModel: ObservableObject {
                 """)
             }
             
-            self.movies = decoded.results
+            self.movies = datum.parts
+//            self.currentPage = datum.currentPage ?? 1
+//            self.totalPages = datum.totalPages ?? 1
             self.appManager.isLoadingView = false
 
         } catch {

@@ -15,11 +15,9 @@ struct AvengersAppApp: App {
 
     var body: some Scene {
         WindowGroup {
-            NavigationStack {
                 ContentView()
                     .environmentObject(myAppManager)
                     .environment(\.managedObjectContext, persistenceController.container.viewContext)
-            }
         }
     }
 }

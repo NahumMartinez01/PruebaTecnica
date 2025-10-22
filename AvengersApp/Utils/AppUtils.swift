@@ -19,7 +19,7 @@ class AppUtils {
         
         let formatterPrint = DateFormatter()
         formatterPrint.locale = Locale(identifier: languageCode)
-        formatterPrint.dateFormat = "dd MMM yyyy"
+        formatterPrint.dateFormat = "dd MMMM yyyy"
         
         return formatterPrint.string(from: date)
     }

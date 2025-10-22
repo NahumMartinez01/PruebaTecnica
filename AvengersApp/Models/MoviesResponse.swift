@@ -7,24 +7,54 @@
 
 import Foundation
 
-struct MovieSearchResponse: Decodable {
-    let results: [Movie]
-}
+import Foundation
 
-struct Movie: Decodable, Identifiable {
-    let id: Int?
-    let title: String?
-    let releaseDate: String?
+struct MovieCollectionResponse: Codable, Identifiable, Hashable  {
+    let id: Int
+    let name: String
+    let originalLanguage: String?
+    let originalName: String?
     let overview: String?
     let posterPath: String?
-    let voteAverage: Double?
+    let backdropPath: String?
+    let parts: [Movie]
+    
+    enum CodingKeys: String, CodingKey {
+        case id
+        case name
+        case originalLanguage = "original_language"
+        case originalName = "original_name"
+        case overview
+        case posterPath = "poster_path"
+        case backdropPath = "backdrop_path"
+        case parts
+    }
+}
 
+struct Movie: Codable, Identifiable, Hashable {
+    let id: Int
+    let title: String?
+    let originalTitle: String?
+    let overview: String?
+    let posterPath: String?
+    let backdropPath: String?
+    let releaseDate: String?
+    let voteAverage: Double?
+    let voteCount: Int?
+    let popularity: Double?
+    let genreIds: [Int]?
+    
     enum CodingKeys: String, CodingKey {
         case id
         case title
-        case releaseDate = "release_date"
+        case originalTitle = "original_title"
         case overview
         case posterPath = "poster_path"
+        case backdropPath = "backdrop_path"
+        case releaseDate = "release_date"
         case voteAverage = "vote_average"
+        case voteCount = "vote_count"
+        case popularity
+        case genreIds = "genre_ids"
     }
 }

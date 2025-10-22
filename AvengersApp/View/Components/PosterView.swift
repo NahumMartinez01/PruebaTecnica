@@ -9,20 +9,27 @@ import SwiftUI
 
 struct PosterView: View {
     let imageUrl: String
+    let height: CGFloat
+    let rounded: CGFloat
+    
+    init(imageUrl: String, height: CGFloat = 220, rounded: CGFloat = 8) {
+        self.imageUrl = imageUrl
+        self.height = height
+        self.rounded = rounded
+    }
     var body: some View {
         VStack(alignment: .center) {
             AsyncImage(url: URL(string: "https://image.tmdb.org/t/p/w500\(imageUrl)")) { image in
                 image
                     .resizable()
-                   // .aspectRatio(contentMode: .fill)
-                    .frame(maxWidth: .infinity,minHeight: 220, maxHeight: 220)
+                    .frame(maxWidth: .infinity,minHeight: height, maxHeight: height)
                     .clipped()
-                    .cornerRadius(8)
+                    .cornerRadius(rounded)
             } placeholder: {
                 Rectangle()
                     .fill(Color.gray.opacity(0.3))
                     .frame(width: 150, height: 220)
-                    .cornerRadius(8)
+                    .cornerRadius(rounded)
                     .overlay {
                         ProgressView()
                     }
@@ -32,5 +39,5 @@ struct PosterView: View {
 }
 
 #Preview {
-    PosterView(imageUrl: "")
+    PosterView(imageUrl: "", height: 200, rounded: 0)
 }

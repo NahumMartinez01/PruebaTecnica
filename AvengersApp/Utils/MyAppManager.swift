@@ -9,6 +9,7 @@ import Foundation
 
 class MyAppManager: ObservableObject {
     @Published var isLoadingView: Bool = true 
+    @Published var selectedLanguage: String = "es-ES"
     
     private static let myAppManager: MyAppManager = {
         return MyAppManager()

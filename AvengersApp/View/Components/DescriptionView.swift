@@ -15,6 +15,8 @@ struct DescriptionView: View {
         VStack {
             Text(title)
                 .font(.headline)
+                .fontWeight(.bold)
+                .foregroundColor(.white)
                 .lineLimit(2)
                 .frame(maxWidth: .infinity, alignment: .leading)
             
@@ -22,7 +24,7 @@ struct DescriptionView: View {
             
             Text(AppUtils.formattedDate(from: movieReleaseDate, languageCode: selectedLanguage).capitalized)
                 .font(.subheadline)
-                .foregroundColor(.secondary)
+                .foregroundColor(Color.white.opacity(0.7))
                 .frame(maxWidth: .infinity, alignment: .leading)
         }
         .frame(maxHeight: 100,alignment: .top)

@@ -10,6 +10,7 @@ import SwiftUI
 struct CardItemsView: View {
     let movie: Movie
     let selectedLanguage: String
+    let action: () -> Void
     var body: some View {
         VStack(spacing: 12) {
             ZStack(alignment: .bottomLeading) {
@@ -26,10 +27,13 @@ struct CardItemsView: View {
             DescriptionView(title: movie.title ?? "", movieReleaseDate: movie.releaseDate ?? "", selectedLanguage: selectedLanguage)
         }
         .frame(maxHeight: 320)
+        .onTapGesture {
+            print("tap")
+            action()
+        }
     }
-    
 }
 
 #Preview {
-    CardItemsView(movie: Movie(id: 0, title: "", releaseDate: "", overview: "", posterPath: "", voteAverage: 0.0), selectedLanguage: "")
+    CardItemsView(movie: Movie(id: 0, title: "Los vengadores", originalTitle: "Los avengeres", overview: "", posterPath: "", backdropPath: "", releaseDate: "", voteAverage: 0.3, voteCount: 0, popularity: 0.1, genreIds: []), selectedLanguage: "",action: {})
 }
