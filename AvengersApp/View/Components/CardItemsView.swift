@@ -27,11 +27,7 @@ struct CardItemsView: View {
             DescriptionView(title: movie.title ?? "", movieReleaseDate: movie.releaseDate ?? "", selectedLanguage: selectedLanguage)
         }
         .frame(maxHeight: 320)
-        .onAppear {
-            print(movie)
-        }
         .onTapGesture {
-            print("tap")
             action()
         }
     }

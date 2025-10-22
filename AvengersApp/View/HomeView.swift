@@ -25,7 +25,7 @@ struct HomeView: View {
                     .onChange(of: viewModel.searchText) { _, newValue in
                         Task {
                             if !newValue.isEmpty, newValue.count > 3 {
-                                await viewModel.fetchMovies(query: newValue)
+                                await viewModel.searchMovies(query: newValue)
                             }
                             else {
                                 await viewModel.fetchMovies()
@@ -38,7 +38,8 @@ struct HomeView: View {
                         ForEach(viewModel.movies) { movie in
                             CardItemsView(movie: movie,
                                           selectedLanguage: myAppManager.selectedLanguage,
-                                          action: {path.append(.detail(movie: movie))})
+                                          action: {path.append(.detail(movie: movie))}
+                            )
                             .onAppear {
                                 if movie.id == viewModel.movies.last?.id && viewModel.currentPage < viewModel.totalPages {
                                     Task {
@@ -52,7 +53,7 @@ struct HomeView: View {
                 }
             }
         }
-        .navigationDestination(for: HomeRoute.self) { route  in
+        .navigationDestination(for: HomeRoute.self) { route in
             switch route {
             case .detail(let movie):
                 DetailView(movie: movie)
@@ -61,10 +62,18 @@ struct HomeView: View {
             }
         }
         .task {
-            await viewModel.fetchMovies()
+            if viewModel.searchText.isEmpty {
+                await viewModel.fetchMovies()
+            } else {
+                await viewModel.searchMovies(query: viewModel.searchText)
+            }
         }
         .refreshable {
-            await viewModel.fetchMovies()
+            if viewModel.searchText.isEmpty {
+                await viewModel.fetchMovies()
+            } else {
+                await viewModel.searchMovies(query: viewModel.searchText)
+            }
         }
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {

@@ -41,12 +41,8 @@ class FavoriteViewModel: ObservableObject {
                     genreIds: nil
                 )
             }
-            
-            print(favorites)
-            print(favoritesEntity)
-            
         } catch {
-            showMessage("❌ Error fetching favorites: \(error)")
+            showMessage("❌ Error obteniendo los favoritos: \(error)")
         }
         
     }

@@ -13,6 +13,7 @@ struct DetailView: View {
     @StateObject private var favoritesVM = FavoriteViewModel()
     
     let movie: Movie
+    
     var body: some View {
         ZStack {
             Color(red: 15/255, green: 15/255, blue: 25/255).ignoresSafeArea()
@@ -85,5 +86,6 @@ struct DetailView: View {
 }
 
 #Preview {
-    DetailView(movie: Movie(id: 0, title: "Los vengadores", originalTitle: "Los avengeres", overview: "", posterPath: "", backdropPath: "", releaseDate: "", voteAverage: 0.3, voteCount: 0, popularity: 0.1, genreIds: []))
+    DetailView(movie: Movie(id: 0, title: "Los vengadores", originalTitle: "Los avengeres", overview: "fdeinfeifnienfeifneifneifneifneifneifneifne", posterPath: "", backdropPath: "", releaseDate: "24-02-2023", voteAverage: 0.3, voteCount: 0, popularity: 0.1, genreIds: []))
+        .environmentObject(MyAppManager())
 }
