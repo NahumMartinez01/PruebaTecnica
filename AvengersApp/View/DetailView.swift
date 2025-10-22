@@ -12,6 +12,7 @@ struct DetailView: View {
     @Environment(\.dismiss) var dismiss
     
     let movie: Movie
+    
     var body: some View {
         ZStack {
             Color(red: 15/255, green: 15/255, blue: 25/255).ignoresSafeArea()

@@ -12,6 +12,10 @@ struct ContentView: View {
     @EnvironmentObject var myAppManager: MyAppManager
     @State private var path = [Movie]()
     
+    init() {
+        NavigationBarConfigurator.setColor(backgroundColor: Color(red: 15/255, green: 15/255, blue: 25/255))
+    }
+    
     var body: some View {
         ZStack {
             NavigationStack(path: $path) {
