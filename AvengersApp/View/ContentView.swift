@@ -10,7 +10,7 @@ import CoreData
 
 struct ContentView: View {
     @EnvironmentObject var myAppManager: MyAppManager
-    @State private var path = [Movie]()
+    @State private var path = [HomeRoute]()
     
     init() {
         NavigationBarConfigurator.setColor(backgroundColor: Color(red: 15/255, green: 15/255, blue: 25/255))
@@ -18,10 +18,12 @@ struct ContentView: View {
     
     var body: some View {
         ZStack {
+            
             NavigationStack(path: $path) {
                 HomeView(path: $path)
+                    .toolbar(.hidden, for: .tabBar)
             }
-          
+            
             if myAppManager.isLoadingView {
                 ZStack {
                     Color.clear
@@ -41,6 +43,7 @@ struct ContentView: View {
 }
 
 #Preview {
-    ContentView().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+    ContentView()
+    //.environment(\.managedObjectContext, PersistenceController.container.viewContext)
         .environmentObject(MyAppManager())
 }

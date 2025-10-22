@@ -6,13 +6,10 @@
 //
 
 import SwiftUI
-
-import SwiftUI
-
 struct HomeView: View {
     @EnvironmentObject var myAppManager: MyAppManager
     @StateObject private var viewModel = MovieViewModel()
-    @Binding var path: [Movie]
+    @Binding var path: [HomeRoute]
     
     private let columns = [
         GridItem(.flexible(), spacing: 20),
@@ -41,7 +38,7 @@ struct HomeView: View {
                         ForEach(viewModel.movies) { movie in
                             CardItemsView(movie: movie,
                                           selectedLanguage: myAppManager.selectedLanguage,
-                                          action: {self.path.append(movie)})
+                                          action: {path.append(.detail(movie: movie))})
                             .onAppear {
                                 if movie.id == viewModel.movies.last?.id && viewModel.currentPage < viewModel.totalPages {
                                     Task {
@@ -55,8 +52,13 @@ struct HomeView: View {
                 }
             }
         }
-        .navigationDestination(for: Movie.self) { movie in
-                    DetailView(movie: movie)
+        .navigationDestination(for: HomeRoute.self) { route  in
+            switch route {
+            case .detail(let movie):
+                DetailView(movie: movie)
+            case .favorites:
+                FavoritesView(path: $path)
+            }
         }
         .task {
             await viewModel.fetchMovies()
@@ -66,7 +68,7 @@ struct HomeView: View {
         }
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
-            ToolbarItem(placement: .navigationBarTrailing) {
+            ToolbarItem(placement: .topBarLeading) {
                 Button(action: {
                     myAppManager.selectedLanguage =  myAppManager.selectedLanguage == "es-ES" ? "en-US" : "es-ES"
                     Task {
@@ -82,6 +84,18 @@ struct HomeView: View {
                 Text("home_title")
                     .font(.headline)
                     .foregroundColor(.white)
+            }
+            
+            ToolbarItem(placement: .topBarTrailing) {
+                Button(action: {
+                    path.append(.favorites)
+                }) {
+                    Image(systemName: "heart.fill")
+                        .resizable()
+                        .scaledToFit()
+                        .foregroundColor(.red)
+                        .frame(width: 24, height: 24)
+                }
             }
         }
     }

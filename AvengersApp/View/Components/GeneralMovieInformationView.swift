@@ -13,6 +13,9 @@ struct GeneralMovieInformationView: View {
     let date: String
     let voteAverage: Double
     let selectedLanguage: String
+    let isFavorite: Bool
+    let onToggleFavorite: () -> Void
+    
     var body: some View {
         VStack(spacing: 20) {
             VStack(spacing: 8) {
@@ -38,6 +41,29 @@ struct GeneralMovieInformationView: View {
                     .foregroundColor(Color.white.opacity(0.85))
                     .frame(maxWidth: 90, alignment: .leading)
                 Spacer()
+                
+                Button {
+                    withAnimation(.easeInOut(duration: 0.2)) {
+                        onToggleFavorite()
+                    }
+                } label: {
+                    ZStack {
+                        Circle()
+                            .stroke(Color.white.opacity(0.3), lineWidth: 1)
+                            .frame(width: 44, height: 44)
+                            .background(
+                                Circle().fill(Color.white.opacity(0.1))
+                            )
+                        
+                        Image(systemName: isFavorite ? "heart.fill" : "heart")
+                            .resizable()
+                            .scaledToFit()
+                            .foregroundColor(isFavorite ? .red : .white)
+                            .frame(width: 24, height: 24)
+
+                    }
+                }
+                .buttonStyle(.plain)
             }
             
             VStack(spacing: 4) {
@@ -58,5 +84,5 @@ struct GeneralMovieInformationView: View {
 }
 
 #Preview {
-    GeneralMovieInformationView(title: "dwdwdw", overview: "dwdwdw", date: "dwdwdwdw", voteAverage: 2.0,selectedLanguage: "")
+    GeneralMovieInformationView(title: "dwdwdw", overview: "dwdwdw", date: "dwdwdwdw", voteAverage: 2.0,selectedLanguage: "", isFavorite: true, onToggleFavorite: {})
 }

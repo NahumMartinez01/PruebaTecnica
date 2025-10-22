@@ -17,7 +17,7 @@ struct AvengersAppApp: App {
         WindowGroup {
                 ContentView()
                     .environmentObject(myAppManager)
-                    .environment(\.managedObjectContext, persistenceController.container.viewContext)
+                    .environment(\.managedObjectContext, persistenceController.context)
         }
     }
 }

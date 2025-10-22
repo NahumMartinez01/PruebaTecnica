@@ -10,9 +10,9 @@ import SwiftUI
 struct DetailView: View {
     @EnvironmentObject var myAppManager: MyAppManager
     @Environment(\.dismiss) var dismiss
+    @StateObject private var favoritesVM = FavoriteViewModel()
     
     let movie: Movie
-    
     var body: some View {
         ZStack {
             Color(red: 15/255, green: 15/255, blue: 25/255).ignoresSafeArea()
@@ -26,9 +26,32 @@ struct DetailView: View {
                                                 overview: movie.overview ?? "",
                                                 date: movie.releaseDate ?? "",
                                                 voteAverage: movie.voteAverage ?? 0.0,
-                                                selectedLanguage: myAppManager.selectedLanguage)
+                                                selectedLanguage: myAppManager.selectedLanguage,
+                                                isFavorite: favoritesVM.isFavorite(movie: movie),
+                                                onToggleFavorite: {
+                        favoritesVM.toggleFavorite(movie: movie)
+                    })
                 }
             }
+            .overlay(
+                Group {
+                    if let message = favoritesVM.message {
+                        Text(message)
+                            .font(.subheadline)
+                            .fontWeight(.bold)
+                            .padding(.horizontal, 16)
+                            .padding(.vertical, 12)
+                            .background(.ultraThinMaterial)
+                            .cornerRadius(12)
+                            .foregroundColor(.white)
+                            .transition(.move(edge: .bottom).combined(with: .opacity))
+                            .zIndex(1)
+                            .padding(.bottom, 40)
+                    }
+                },
+                alignment: .bottom
+            )
+            .animation(.easeInOut, value: favoritesVM.message)
         }
         .frame(
             minWidth: 0,
@@ -37,6 +60,9 @@ struct DetailView: View {
             maxHeight: .infinity,
             alignment: .top
         )
+        .onAppear {
+            favoritesVM.loadFavorites()
+        }
         .navigationBarTitleDisplayMode(.inline)
         .navigationBarBackButtonHidden(true)
         .toolbar {
