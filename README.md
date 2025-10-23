@@ -1,5 +1,22 @@
 # 🎬 AvengersApp – Prueba Técnica iOS 
 
+<table align="center">
+  <tr>
+    <td align="center">
+      <img src="Screenshots/Referencia2.jpeg" alt="Home Screen" width="200"/>
+      <br>Home Screen
+    </td>
+    <td align="center">
+      <img src="Screenshots/Referencia5.jpeg" alt="Details Screen" width="200"/>
+      <br>Details Screen
+    </td>
+      <td align="center">
+      <img src="Screenshots/Referencia3.jpeg" alt="Details Screen" width="200"/>
+      <br>My Favorites Screen
+    </td>
+  </tr>
+</table>
+
 ## 📱 Descripción
 AvengersApp es una aplicación desarrollada en SwiftUI que consume la API pública de The Movie Database (TMDB)
 Permite explorar una lista de películas, consultar sus detalles y agregar favoritos utilizando persistencia local con Core Data.
@@ -9,13 +26,14 @@ El proyecto fue construido siguiendo buenas prácticas de arquitectura (MVVM), a
 - Listado de peliculas obtenidas desde la API pública de The Movie Database (TMDB) mostrando inicialmente solo peliculas de Avengers
 - Pantalla de detalles que contiene poster, titulo, calificación,fecha estreno,sinopsis,botón para añadir a favoritos
 - Buscador de peliculas nos permite buscar cualquier pelicula que se encuentre en el API de TMDBS
-- Peliculas favoritas con persistencia de datos con **Core Data**
+- Peliculas favoritas con persistencia de datos con **Core Data** se accede desde la NavigationBar presionando el icono de ❤️
 - Diseño moderno con SwiftUI
 - Arquitectura MVVM, separando Lógica de negocio, Vistas y Modelos
 - Uso de localizable para mostrar Títulos de la barra de navegación en Ingles/Español dependiendo configuración de idioma del dispositivo
 - Uso de Async/ Await para peticiones asíncronas limpias.
 - Pruebas Unitarias (XCTest)
 - Pruebas UI (XCUITest)
+- Se pueden obtener la Información de la pelicula en Ingles/ Español presionando en la NavigationBar en la parte Izquierda (EN/ES)
 
 ## ⚙️ Tecnologías utilizadas
 | Tecnología                        | Descripción                        |
