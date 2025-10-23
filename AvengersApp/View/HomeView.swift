@@ -44,11 +44,14 @@ struct HomeView: View {
                                               selectedLanguage: myAppManager.selectedLanguage,
                                               action: {path.append(.detail(movie: movie))}
                                 )
+                                .accessibilityElement(children: .contain)
                                 .accessibilityIdentifier("MovieCell_\(movie.id)")
                                 .onAppear {
-                                    if movie.id == viewModel.movies.last?.id && viewModel.currentPage < viewModel.totalPages {
+                                    if movie.id == viewModel.movies.last?.id,
+                                       viewModel.currentPage < viewModel.totalPages,
+                                       !viewModel.isLoadingPage {
                                         Task {
-                                            await viewModel.fetchMovies(query: viewModel.searchText, page: viewModel.currentPage + 1)
+                                            await viewModel.getData()
                                         }
                                     }
                                 }
@@ -57,7 +60,6 @@ struct HomeView: View {
                         .padding()
                     }
                 }
-                
             }
             .frame(
                 minWidth: 0,
@@ -85,18 +87,10 @@ struct HomeView: View {
             }
         }
         .task {
-            if viewModel.searchText.isEmpty {
-                await viewModel.fetchMovies()
-            } else {
-                await viewModel.searchMovies(query: viewModel.searchText)
-            }
+            await viewModel.getData()
         }
         .refreshable {
-            if viewModel.searchText.isEmpty {
-                await viewModel.fetchMovies()
-            } else {
-                await viewModel.searchMovies(query: viewModel.searchText)
-            }
+            await viewModel.getData()
         }
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {

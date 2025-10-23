@@ -25,10 +25,6 @@ struct ContentView: View {
             
             if myAppManager.isLoadingView {
                 ZStack {
-                    Color.clear
-                        .background(.ultraThinMaterial)
-                        .ignoresSafeArea()
-                    
                     ProgressView()
                         .scaleEffect(1.5)
                         .tint(.white)

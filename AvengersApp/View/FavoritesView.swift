@@ -31,6 +31,8 @@ struct FavoritesView: View {
                                 CardItemsView(movie: movie,
                                               selectedLanguage: myAppManager.selectedLanguage,
                                               action: {path.append(.detail(movie: movie))})
+                                                .accessibilityElement(children: .contain)
+                                                .accessibilityIdentifier("MovieFavCell_\(movie.id)")
                             }
                         }
                         .padding()
