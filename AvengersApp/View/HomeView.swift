@@ -33,7 +33,7 @@ struct HomeView: View {
                         }
                     }
                 
-                if viewModel.movies.isEmpty {
+                if viewModel.isEmptyData() {
                     EmptyDataView()
                 }
                 else {

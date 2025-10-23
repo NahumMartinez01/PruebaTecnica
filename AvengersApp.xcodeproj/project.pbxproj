@@ -29,20 +29,40 @@
 		FEC5B81D2EA9D33B0000F1B7 /* AvengersUIAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AvengersUIAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		FE2577BC2EAA903A00908AF0 /* Exceptions for "AvengersApp" folder in "AvengersApp" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Test/AvengersAppTests/FavoriteViewModelTests.swift,
+				Test/AvengersUIAppTests/AvengersAppUITests.swift,
+			);
+			target = FE8D033C2EA8457D00FB9740 /* AvengersApp */;
+		};
+		FE2577BD2EAA903A00908AF0 /* Exceptions for "AvengersApp" folder in "AvengersAppTests" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Test/AvengersAppTests/FavoriteViewModelTests.swift,
+			);
+			target = FEC5B8092EA9CD5F0000F1B7 /* AvengersAppTests */;
+		};
+		FE2577BE2EAA903A00908AF0 /* Exceptions for "AvengersApp" folder in "AvengersUIAppTests" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Test/AvengersUIAppTests/AvengersAppUITests.swift,
+			);
+			target = FEC5B81C2EA9D33B0000F1B7 /* AvengersUIAppTests */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		FE8D033F2EA8457D00FB9740 /* AvengersApp */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				FE2577BC2EAA903A00908AF0 /* Exceptions for "AvengersApp" folder in "AvengersApp" target */,
+				FE2577BD2EAA903A00908AF0 /* Exceptions for "AvengersApp" folder in "AvengersAppTests" target */,
+				FE2577BE2EAA903A00908AF0 /* Exceptions for "AvengersApp" folder in "AvengersUIAppTests" target */,
+			);
 			path = AvengersApp;
-			sourceTree = "<group>";
-		};
-		FEC5B80B2EA9CD5F0000F1B7 /* AvengersAppTests */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = AvengersAppTests;
-			sourceTree = "<group>";
-		};
-		FEC5B81E2EA9D33B0000F1B7 /* AvengersUIAppTests */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = AvengersUIAppTests;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -76,8 +96,6 @@
 			isa = PBXGroup;
 			children = (
 				FE8D033F2EA8457D00FB9740 /* AvengersApp */,
-				FEC5B80B2EA9CD5F0000F1B7 /* AvengersAppTests */,
-				FEC5B81E2EA9D33B0000F1B7 /* AvengersUIAppTests */,
 				FE8D033E2EA8457D00FB9740 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -130,9 +148,6 @@
 			dependencies = (
 				FEC5B80F2EA9CD5F0000F1B7 /* PBXTargetDependency */,
 			);
-			fileSystemSynchronizedGroups = (
-				FEC5B80B2EA9CD5F0000F1B7 /* AvengersAppTests */,
-			);
 			name = AvengersAppTests;
 			packageProductDependencies = (
 			);
@@ -152,9 +167,6 @@
 			);
 			dependencies = (
 				FEC5B8242EA9D33B0000F1B7 /* PBXTargetDependency */,
-			);
-			fileSystemSynchronizedGroups = (
-				FEC5B81E2EA9D33B0000F1B7 /* AvengersUIAppTests */,
 			);
 			name = AvengersUIAppTests;
 			packageProductDependencies = (
@@ -407,6 +419,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -435,6 +448,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
