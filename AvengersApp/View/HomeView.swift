@@ -12,13 +12,13 @@ struct HomeView: View {
     @Binding var path: [HomeRoute]
     
     private let columns = [
-        GridItem(.flexible(), spacing: 20),
-        GridItem(.flexible(), spacing: 20)
+        GridItem(.flexible(), spacing: 10),
+        GridItem(.flexible(), spacing: 10)
     ]
     
     var body: some View {
         ZStack {
-            Color(red: 15/255, green: 15/255, blue: 25/255).ignoresSafeArea()
+            Color(.background).ignoresSafeArea()
             
             VStack {
                 SearchBarView(searchText: $viewModel.searchText)
@@ -33,25 +33,48 @@ struct HomeView: View {
                         }
                     }
                 
-                ScrollView {
-                    LazyVGrid(columns: columns, spacing: 20) {
-                        ForEach(viewModel.movies) { movie in
-                            CardItemsView(movie: movie,
-                                          selectedLanguage: myAppManager.selectedLanguage,
-                                          action: {path.append(.detail(movie: movie))}
-                            )
-                            .onAppear {
-                                if movie.id == viewModel.movies.last?.id && viewModel.currentPage < viewModel.totalPages {
-                                    Task {
-                                        await viewModel.fetchMovies(query: viewModel.searchText, page: viewModel.currentPage + 1)
+                if viewModel.movies.isEmpty {
+                    EmptyDataView()
+                }
+                else {
+                    ScrollView {
+                        LazyVGrid(columns: columns, spacing: 10) {
+                            ForEach(viewModel.movies) { movie in
+                                CardItemsView(movie: movie,
+                                              selectedLanguage: myAppManager.selectedLanguage,
+                                              action: {path.append(.detail(movie: movie))}
+                                )
+                                .accessibilityIdentifier("MovieCell_\(movie.id)")
+                                .onAppear {
+                                    if movie.id == viewModel.movies.last?.id && viewModel.currentPage < viewModel.totalPages {
+                                        Task {
+                                            await viewModel.fetchMovies(query: viewModel.searchText, page: viewModel.currentPage + 1)
+                                        }
                                     }
                                 }
                             }
                         }
+                        .padding()
                     }
-                    .padding()
                 }
+                
             }
+            .frame(
+                minWidth: 0,
+                maxWidth: .infinity,
+                minHeight: 0,
+                maxHeight: .infinity,
+                alignment: .top
+            )
+            .overlay(
+                Group {
+                    if let errorMessage = viewModel.errorMessage {
+                        ToastMessage(message: errorMessage)
+                    }
+                },
+                alignment: .bottom
+            )
+            .animation(.easeInOut, value: viewModel.errorMessage)
         }
         .navigationDestination(for: HomeRoute.self) { route in
             switch route {
@@ -105,6 +128,7 @@ struct HomeView: View {
                         .foregroundColor(.red)
                         .frame(width: 24, height: 24)
                 }
+                .accessibilityIdentifier("FavoritesToolbarButton")
             }
         }
     }

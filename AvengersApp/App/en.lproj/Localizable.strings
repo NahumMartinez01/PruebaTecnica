@@ -7,3 +7,5 @@
 */
 
 "home_title" = "Movies";
+"fav_title" = "My favorites";
+"search_placeholder" = "Search for a movie...";

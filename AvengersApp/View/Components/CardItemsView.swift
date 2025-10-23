@@ -20,13 +20,17 @@ struct CardItemsView: View {
                 
                 VoteProgressCircle(voteAverage: movie.voteAverage ?? 0.0)
                     .offset(y: 20)
-                    .padding(.leading, 0)
+                    .padding(.leading, 2)
             }
             .padding(.bottom, 10)
             
             DescriptionView(title: movie.title ?? "", movieReleaseDate: movie.releaseDate ?? "", selectedLanguage: selectedLanguage)
         }
-        .frame(maxHeight: 320)
+        .frame(maxHeight: 300)
+        .overlay(
+            RoundedRectangle(cornerRadius: 8)
+                .stroke(Color(.borderCard), lineWidth: 0.5)
+        )
         .onTapGesture {
             action()
         }

@@ -16,11 +16,12 @@ class FavoriteViewModel: ObservableObject {
     private let context: NSManagedObjectContext
     private var appManager: MyAppManager
     
-    init() {
-        appManager = MyAppManager.shared()
-        context = PersistenceController.shared.context
-    }
+    init(context: NSManagedObjectContext = PersistenceController.shared.context) {
+          self.context = context
+          self.appManager = MyAppManager.shared()
+      }
     
+    //MARK: FETCH THE FAVORITES MOVIES BY CORE DATA
     func loadFavorites() {
         let request: NSFetchRequest<FavoriteMovieEntity> = FavoriteMovieEntity.fetchRequest()
         do {
@@ -47,6 +48,7 @@ class FavoriteViewModel: ObservableObject {
         
     }
     
+    // MARK: TOGGLE FAVORITE FUNCTION
     func toggleFavorite(movie: Movie) {
         if isFavorite(movie: movie) {
             removeFavorite(movie: movie)
@@ -57,10 +59,12 @@ class FavoriteViewModel: ObservableObject {
         }
     }
     
+    //MARK: GET FAVORITE MOVIES
     func isFavorite(movie: Movie) -> Bool {
         favorites.contains(where: { $0.id == movie.id })
     }
     
+    // MARK: PREPARE DATA TO SAVE IN CORE DATA
     private func addFavorite(movie: Movie) {
         let entity = FavoriteMovieEntity(context: context)
         entity.id = Int64(movie.id)
@@ -72,6 +76,7 @@ class FavoriteViewModel: ObservableObject {
         save()
     }
     
+    // MARK: REMOVE TO FAVORITE MOVIES IN CORE DATA
     private func removeFavorite(movie: Movie) {
         if let existing = favoritesEntity.first(where: { $0.id == movie.id }) {
             context.delete(existing)
@@ -79,16 +84,17 @@ class FavoriteViewModel: ObservableObject {
         }
     }
     
+    // MARK: SAVE TO FAVORITE MOVIES IN CORE DATA
     private func save() {
         PersistenceController.shared.saveContext()
         loadFavorites()
     }
     
+    // MARK: SHOW SUCCESS OR ERROR TOAST MESSAGE
     private func showMessage(_ text: String) {
         message = text
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
             self.message = nil
         }
     }
-    
 }

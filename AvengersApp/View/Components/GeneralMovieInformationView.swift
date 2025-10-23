@@ -60,10 +60,11 @@ struct GeneralMovieInformationView: View {
                             .scaledToFit()
                             .foregroundColor(isFavorite ? .red : .white)
                             .frame(width: 24, height: 24)
-
+                        
                     }
                 }
                 .buttonStyle(.plain)
+                .accessibilityIdentifier("FavoriteButton")
             }
             
             VStack(spacing: 4) {

@@ -16,7 +16,7 @@ struct DetailView: View {
     
     var body: some View {
         ZStack {
-            Color(red: 15/255, green: 15/255, blue: 25/255).ignoresSafeArea()
+            Color(.background).ignoresSafeArea()
             ScrollView {
                 VStack {
                     PosterView(imageUrl: movie.posterPath ?? "", height: 350.0, rounded: 0)
@@ -37,20 +37,13 @@ struct DetailView: View {
             .overlay(
                 Group {
                     if let message = favoritesVM.message {
-                        Text(message)
-                            .font(.subheadline)
-                            .fontWeight(.bold)
-                            .padding(.horizontal, 16)
-                            .padding(.vertical, 12)
-                            .background(.ultraThinMaterial)
-                            .cornerRadius(12)
-                            .foregroundColor(.white)
-                            .transition(.move(edge: .bottom).combined(with: .opacity))
-                            .zIndex(1)
-                            .padding(.bottom, 40)
+                        ToastMessage(message: message)
+                            .accessibilityIdentifier("ToastMessage") 
                     }
+                   
                 },
                 alignment: .bottom
+                
             )
             .animation(.easeInOut, value: favoritesVM.message)
         }
@@ -80,6 +73,7 @@ struct DetailView: View {
                 Text(movie.title ?? "")
                     .font(.headline)
                     .foregroundColor(.white)
+                    .accessibilityIdentifier("DetailTitle")
             }
         }
     }

@@ -13,30 +13,37 @@ struct FavoritesView: View {
     @StateObject private var favoritesVM = FavoriteViewModel()
     @Binding var path: [HomeRoute]
     private let columns = [
-        GridItem(.flexible(), spacing: 20),
-        GridItem(.flexible(), spacing: 20)
+        GridItem(.flexible(), spacing: 10),
+        GridItem(.flexible(), spacing: 10)
     ]
     
     var body: some View {
         ZStack {
-            Color(red: 15/255, green: 15/255, blue: 25/255).ignoresSafeArea()
-            
-            ScrollView {
-                LazyVGrid(columns: columns, spacing: 20) {
-                    ForEach(favoritesVM.favorites) { movie in
-                        CardItemsView(movie: movie,
-                                      selectedLanguage: myAppManager.selectedLanguage,
-                                      action: {path.append(.detail(movie: movie))})
-                    }
+            Color(.background).ignoresSafeArea()
+            VStack {
+                if favoritesVM.favorites.isEmpty {
+                   EmptyDataView()
                 }
-                .padding()
+                else {
+                    ScrollView {
+                        LazyVGrid(columns: columns, spacing: 10) {
+                            ForEach(favoritesVM.favorites) { movie in
+                                CardItemsView(movie: movie,
+                                              selectedLanguage: myAppManager.selectedLanguage,
+                                              action: {path.append(.detail(movie: movie))})
+                            }
+                        }
+                        .padding()
+                    }
+                    
+                }
             }
         }
         .scrollContentBackground(.hidden)
         .onAppear {
             favoritesVM.loadFavorites()
         }
-        .navigationTitle("Mis Favoritos")
+        .navigationTitle("fav_title")
         .navigationBarTitleDisplayMode(.inline)
         .navigationBarBackButtonHidden(true)
         .toolbar {

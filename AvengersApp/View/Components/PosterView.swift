@@ -12,7 +12,7 @@ struct PosterView: View {
     let height: CGFloat
     let rounded: CGFloat
     
-    init(imageUrl: String, height: CGFloat = 220, rounded: CGFloat = 8) {
+    init(imageUrl: String, height: CGFloat = 200, rounded: CGFloat = 8) {
         self.imageUrl = imageUrl
         self.height = height
         self.rounded = rounded
@@ -28,7 +28,7 @@ struct PosterView: View {
             } placeholder: {
                 Rectangle()
                     .fill(Color.gray.opacity(0.3))
-                    .frame(width: 150, height: 220)
+                    .frame(maxWidth: .infinity,minHeight: height, maxHeight: height)
                     .cornerRadius(rounded)
                     .overlay {
                         ProgressView()

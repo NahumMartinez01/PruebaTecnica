@@ -13,12 +13,11 @@ struct ContentView: View {
     @State private var path = [HomeRoute]()
     
     init() {
-        NavigationBarConfigurator.setColor(backgroundColor: Color(red: 15/255, green: 15/255, blue: 25/255))
+        NavigationBarConfigurator.setColor(backgroundColor: Color(.background))
     }
     
     var body: some View {
         ZStack {
-            
             NavigationStack(path: $path) {
                 HomeView(path: $path)
                     .toolbar(.hidden, for: .tabBar)

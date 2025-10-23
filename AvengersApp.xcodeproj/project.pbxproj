@@ -6,8 +6,27 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXContainerItemProxy section */
+		FEC5B80E2EA9CD5F0000F1B7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FE8D03352EA8457D00FB9740 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = FE8D033C2EA8457D00FB9740;
+			remoteInfo = AvengersApp;
+		};
+		FEC5B8232EA9D33B0000F1B7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FE8D03352EA8457D00FB9740 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = FE8D033C2EA8457D00FB9740;
+			remoteInfo = AvengersApp;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		FE8D033D2EA8457D00FB9740 /* AvengersApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AvengersApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		FEC5B80A2EA9CD5F0000F1B7 /* AvengersAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AvengersAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		FEC5B81D2EA9D33B0000F1B7 /* AvengersUIAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AvengersUIAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -16,10 +35,34 @@
 			path = AvengersApp;
 			sourceTree = "<group>";
 		};
+		FEC5B80B2EA9CD5F0000F1B7 /* AvengersAppTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = AvengersAppTests;
+			sourceTree = "<group>";
+		};
+		FEC5B81E2EA9D33B0000F1B7 /* AvengersUIAppTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = AvengersUIAppTests;
+			sourceTree = "<group>";
+		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		FE8D033A2EA8457D00FB9740 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FEC5B8072EA9CD5F0000F1B7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FEC5B81A2EA9D33B0000F1B7 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -33,6 +76,8 @@
 			isa = PBXGroup;
 			children = (
 				FE8D033F2EA8457D00FB9740 /* AvengersApp */,
+				FEC5B80B2EA9CD5F0000F1B7 /* AvengersAppTests */,
+				FEC5B81E2EA9D33B0000F1B7 /* AvengersUIAppTests */,
 				FE8D033E2EA8457D00FB9740 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -41,6 +86,8 @@
 			isa = PBXGroup;
 			children = (
 				FE8D033D2EA8457D00FB9740 /* AvengersApp.app */,
+				FEC5B80A2EA9CD5F0000F1B7 /* AvengersAppTests.xctest */,
+				FEC5B81D2EA9D33B0000F1B7 /* AvengersUIAppTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -70,6 +117,52 @@
 			productReference = FE8D033D2EA8457D00FB9740 /* AvengersApp.app */;
 			productType = "com.apple.product-type.application";
 		};
+		FEC5B8092EA9CD5F0000F1B7 /* AvengersAppTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FEC5B8102EA9CD5F0000F1B7 /* Build configuration list for PBXNativeTarget "AvengersAppTests" */;
+			buildPhases = (
+				FEC5B8062EA9CD5F0000F1B7 /* Sources */,
+				FEC5B8072EA9CD5F0000F1B7 /* Frameworks */,
+				FEC5B8082EA9CD5F0000F1B7 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				FEC5B80F2EA9CD5F0000F1B7 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				FEC5B80B2EA9CD5F0000F1B7 /* AvengersAppTests */,
+			);
+			name = AvengersAppTests;
+			packageProductDependencies = (
+			);
+			productName = AvengersAppTests;
+			productReference = FEC5B80A2EA9CD5F0000F1B7 /* AvengersAppTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		FEC5B81C2EA9D33B0000F1B7 /* AvengersUIAppTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FEC5B8252EA9D33B0000F1B7 /* Build configuration list for PBXNativeTarget "AvengersUIAppTests" */;
+			buildPhases = (
+				FEC5B8192EA9D33B0000F1B7 /* Sources */,
+				FEC5B81A2EA9D33B0000F1B7 /* Frameworks */,
+				FEC5B81B2EA9D33B0000F1B7 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				FEC5B8242EA9D33B0000F1B7 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				FEC5B81E2EA9D33B0000F1B7 /* AvengersUIAppTests */,
+			);
+			name = AvengersUIAppTests;
+			packageProductDependencies = (
+			);
+			productName = AvengersUIAppTests;
+			productReference = FEC5B81D2EA9D33B0000F1B7 /* AvengersUIAppTests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -82,6 +175,15 @@
 				TargetAttributes = {
 					FE8D033C2EA8457D00FB9740 = {
 						CreatedOnToolsVersion = 16.4;
+					};
+					FEC5B8092EA9CD5F0000F1B7 = {
+						CreatedOnToolsVersion = 16.4;
+						LastSwiftMigration = 1640;
+						TestTargetID = FE8D033C2EA8457D00FB9740;
+					};
+					FEC5B81C2EA9D33B0000F1B7 = {
+						CreatedOnToolsVersion = 16.4;
+						TestTargetID = FE8D033C2EA8457D00FB9740;
 					};
 				};
 			};
@@ -101,12 +203,28 @@
 			projectRoot = "";
 			targets = (
 				FE8D033C2EA8457D00FB9740 /* AvengersApp */,
+				FEC5B8092EA9CD5F0000F1B7 /* AvengersAppTests */,
+				FEC5B81C2EA9D33B0000F1B7 /* AvengersUIAppTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
 		FE8D033B2EA8457D00FB9740 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FEC5B8082EA9CD5F0000F1B7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FEC5B81B2EA9D33B0000F1B7 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -123,7 +241,34 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		FEC5B8062EA9CD5F0000F1B7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FEC5B8192EA9D33B0000F1B7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		FEC5B80F2EA9CD5F0000F1B7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = FE8D033C2EA8457D00FB9740 /* AvengersApp */;
+			targetProxy = FEC5B80E2EA9CD5F0000F1B7 /* PBXContainerItemProxy */;
+		};
+		FEC5B8242EA9D33B0000F1B7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = FE8D033C2EA8457D00FB9740 /* AvengersApp */;
+			targetProxy = FEC5B8232EA9D33B0000F1B7 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		FE8D034B2EA8457E00FB9740 /* Debug */ = {
@@ -305,6 +450,79 @@
 			};
 			name = Release;
 		};
+		FEC5B8112EA9CD5F0000F1B7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = Y72TUDUKGS;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.nahum.AvengersAppTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AvengersApp.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/AvengersApp";
+			};
+			name = Debug;
+		};
+		FEC5B8122EA9CD5F0000F1B7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = Y72TUDUKGS;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.nahum.AvengersAppTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AvengersApp.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/AvengersApp";
+			};
+			name = Release;
+		};
+		FEC5B8262EA9D33B0000F1B7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = Y72TUDUKGS;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.nahum.AvengersUIAppTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = AvengersApp;
+			};
+			name = Debug;
+		};
+		FEC5B8272EA9D33B0000F1B7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = Y72TUDUKGS;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.nahum.AvengersUIAppTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = AvengersApp;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -322,6 +540,24 @@
 			buildConfigurations = (
 				FE8D034E2EA8457E00FB9740 /* Debug */,
 				FE8D034F2EA8457E00FB9740 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FEC5B8102EA9CD5F0000F1B7 /* Build configuration list for PBXNativeTarget "AvengersAppTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FEC5B8112EA9CD5F0000F1B7 /* Debug */,
+				FEC5B8122EA9CD5F0000F1B7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FEC5B8252EA9D33B0000F1B7 /* Build configuration list for PBXNativeTarget "AvengersUIAppTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FEC5B8262EA9D33B0000F1B7 /* Debug */,
+				FEC5B8272EA9D33B0000F1B7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

@@ -28,6 +28,8 @@ struct DescriptionView: View {
                 .frame(maxWidth: .infinity, alignment: .leading)
         }
         .frame(maxHeight: 100,alignment: .top)
+        .padding(.horizontal, 4)
+        .padding(.vertical, 4)
     }
 }
 

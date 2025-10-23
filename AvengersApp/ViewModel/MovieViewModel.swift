@@ -21,6 +21,7 @@ class MovieViewModel: ObservableObject {
         appManager = MyAppManager.shared()
     }
     
+    // MARK: FUNCTION TO GET MARVEL'S AVENGER MOVIE
     @MainActor
     func fetchMovies(query: String = "Avengers", page: Int = 1) async {
         errorMessage = nil
@@ -67,10 +68,7 @@ class MovieViewModel: ObservableObject {
             
             for movie in datum.parts {
                 print("""
-                🎬 Título: \(movie.title)
-                📅 Estreno: \(movie.releaseDate ?? "Sin fecha")
-                📝 Descripción: \(movie.overview?.prefix(100) ?? "Sin descripción")...
-                   Rate: \(movie.voteAverage ?? 10000000.00)
+                \(movie)
                 -----------------------------
                 """)
             }
@@ -84,6 +82,7 @@ class MovieViewModel: ObservableObject {
         }
     }
     
+    //MARK: FUNCTION TO SEARCH SPECIFIC MOVIES
     @MainActor
     func searchMovies(query: String, page: Int = 1) async {
         errorMessage = nil
