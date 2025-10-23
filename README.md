@@ -12,6 +12,7 @@ El proyecto fue construido siguiendo buenas prácticas de arquitectura (MVVM), a
 - Peliculas favoritas con persistencia de datos con **Core Data**
 - Diseño moderno con SwiftUI
 - Arquitectura MVVM, separando Lógica de negocio, Vistas y Modelos
+- Uso de localizable para mostrar Títulos de la barra de navegación en Ingles/Español dependiendo configuración de idioma del dispositivo
 - Uso de Async/ Await para peticiones asíncronas limpias.
 - Pruebas Unitarias (XCTest)
 - Pruebas UI (XCUITest)
@@ -22,7 +23,7 @@ El proyecto fue construido siguiendo buenas prácticas de arquitectura (MVVM), a
 | **Swift 6.1.2**                   | Lenguaje principal                 |
 | **SwiftUI**                       | Framework de interfaz declarativa  |
 | **MVVM**                          | Patrón de arquitectura             |
-| **Core Data**                     | Persistencia de favoritos          |
+| **Core Data**                     | Persistencia de datos              |
 | **Async/Await**                   | Concurrencia moderna               |
 | **XCTest / XCUITest**             | Testing unitario y de interfaz     |
 | **The Movie Database API (TMDB)** | Fuente de datos                    |
@@ -46,71 +47,61 @@ La sección de favoritos en AvengersApp se implementa usando **Core Data** con *
 ## 🏗️ Arquitectura (MVVM)
 El proyecto está organizado bajo el patrón Model-View-ViewModel para promover modularidad, escalabilidad y testabilidad.
 ```
-AvengersApp/
-│
-├── App/
-│   ├── Assets.xcassets/
-│   │   ├── AccentColor.colorset/
-│   │   │   └── Contents.json
-│   │   ├── AppIcon.appiconset/
-│   │   │   └── Contents.json
-│   │   ├── Colors/
-│   │   │   ├── Contents.json
-│   │   │   ├── background.colorset/
-│   │   │   ├── borderCard.colorset/
-│   │   │   └── toastBg.colorset/
-│   │   └── Contents.json
-│   ├── Persistence.swift
-│   ├── en.lproj/
-│   │   └── Localizable.strings
-│   └── es-419.lproj/
-│       └── Localizable.strings
-│
-├── Models/
-│   └── MoviesResponse.swift
-│
-├── Network/
-│   ├── APIConstants.swift
-│   └── NetworkManager.swift
-│
-├── Persistence/
-│   ├── AvengersApp.xcdatamodeld/
-│   │   └── AvengersApp.xcdatamodel/
-│   │       └── contents
-│   └── AvengersAppApp.swift
-│
-├── Test/
-│   ├── AvengersAppTests/
-│   │   └── FavoriteViewModelTests.swift
-│   └── AvengersUIAppTests/
-│       ├── AvengersAppUITests.swift
-│       └── AvengersUIAppTestsLaunchTests.swift
-│
-├── Utils/
-│   ├── AppUtils.swift
-│   ├── Enums.swift
-│   └── MyAppManager.swift
-│
-├── View/
-│   ├── Components/
-│   │   ├── CardItemsView.swift
-│   │   ├── DescriptionView.swift
-│   │   ├── EmptyDataView.swift
-│   │   ├── GeneralMovieInformationView.swift
-│   │   ├── PosterView.swift
-│   │   ├── SearchBarView.swift
-│   │   ├── ToastMessage.swift
-│   │   └── VoteProgressCircle.swift
-│   ├── ContentView.swift
-│   ├── DetailView.swift
-│   ├── FavoritesView.swift
-│   └── HomeView.swift
-│
-└── ViewModel/
-    ├── FavoriteViewModel.swift
-    └── MovieViewModel.swift
+├── AvengersApp
+│   ├── App
+│   │   ├── Assets.xcassets
+│   │   │   ├── AccentColor.colorset
+│   │   │   │   └── Contents.json
+│   │   │   ├── AppIcon.appiconset
+│   │   │   │   └── Contents.json
+│   │   │   ├── Colors
+│   │   │   │   ├── Contents.json
+│   │   │   │   ├── background.colorset
+│   │   │   │   ├── borderCard.colorset
+│   │   │   │   └── toastBg.colorset
+│   │   │   └── Contents.json
+│   │   ├── AvengersAppApp.swift
+│   │   ├── en.lproj
+│   │   │   └── Localizable.strings
+│   │   └── es-419.lproj
+│   │       └── Localizable.strings
+│   ├── Models
+│   │   └── MoviesResponse.swift
+│   ├── Network
+│   │   ├── APIConstants.swift
+│   │   └── NetworkManager.swift
+│   ├── Persistence
+│   │   ├── AvengersApp.xcdatamodeld
+│   │   │   └── AvengersApp.xcdatamodel
+│   │   │       └── contents
+│   │   └── Persistence.swift
+│   ├── Test
+│   │   ├── AvengersAppTests
+│   │   │   └── FavoriteViewModelTests.swift
+│   │   └── AvengersUIAppTests
+│   │       └── AvengersAppUITests.swift
+│   ├── Utils
+│   │   ├── AppUtils.swift
+│   │   ├── Enums.swift
+│   │   └── MyAppManager.swift
+│   ├── View
+│   │   ├── Components
+│   │   │   ├── CardItemsView.swift
+│   │   │   ├── DescriptionView.swift
+│   │   │   ├── EmptyDataView.swift
+│   │   │   ├── GeneralMovieInformationView.swift
+│   │   │   ├── PosterView.swift
+│   │   │   ├── SearchBarView.swift
+│   │   │   ├── ToastMessage.swift
+│   │   │   └── VoteProgressCircle.swift
+│   │   ├── ContentView.swift
+│   │   ├── DetailView.swift
+│   │   ├── FavoritesView.swift
+│   │   └── HomeView.swift
+│   └── ViewModel
+│       ├── FavoriteViewModel.swift
+│       └── MovieViewModel.swift
 ```
-
 ## 🔑 Configuración del proyecto
 ```bash
 1.Clonar el repositorio:
@@ -120,3 +111,20 @@ https://github.com/NahumMartinez01/PruebaTecnica.git
 2. Abrir el proyecto
 open AvengersApp.xcodeproj
 ```
+## 🧪 Pruebas
+Para ejecutar las pruebas:
+```bash
+Cmd + U
+```
+O desde Xcode → Product → Test.
+Tipos de pruebas
+- ✅ Unit Tests: Validan la lógica de negocio (ViewModels y Guardado favorito).
+- 🧭 UI Tests: Simulan interacciones de usuario (favoritos, navegaciónes).
+## 🧠 Buenas prácticas aplicadas
+- Uso de MVVM con responsabilidad clara por capa.
+- Inyección de dependencias para facilitar testing.
+- Uso de @StateObject en vistas SwiftUI.
+- Creación de componentes.
+- Async/Await para un código más legible y moderno.
+- Core Data con capa de persistencia centralizada.
+- Tests para asegurar la calidad del código.
